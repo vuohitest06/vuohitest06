@@ -32,9 +32,9 @@ public class WishListService implements Serializable {
 
     private final static Logger LOGGER = Logger.getLogger(WishListService.class.getName());
     
-    @Getter
-    @Setter
-    private String newCategoryName;
+//    @Getter
+//    @Setter
+//    private String newCategoryName;
 
     @EJB
     private SteamConnector steamConnector;
@@ -137,7 +137,7 @@ public class WishListService implements Serializable {
         // wishList = steamConnector.getWishListFromSteam();
     }
 
-    public void createNewCategory(){
+    public void createNewCategory(String newCategoryName){
         LOGGER.log(Level.SEVERE, "*****************");
         LOGGER.log(Level.SEVERE, "*****************");
         LOGGER.log(Level.SEVERE, "*****************");
@@ -148,7 +148,6 @@ public class WishListService implements Serializable {
         Category category = new Category(user, newCategoryName);
         categoryDao.create(category);
         updateCategoryList();
-        newCategoryName = "";
         throw new NullPointerException();
     }
 

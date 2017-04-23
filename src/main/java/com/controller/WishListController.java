@@ -4,6 +4,7 @@ import com.domain.Category;
 import com.domain.Wish;
 import com.service.WishListService;
 import lombok.Getter;
+import lombok.Setter;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -25,6 +26,10 @@ public class WishListController implements Serializable {
     @EJB
     @Getter
     private WishListService wishListService;
+
+    @Getter
+    @Setter
+    private String newCategoryName;
 
     public List<Category> getCategoryList(){
         return wishListService.getCategoryList();
@@ -59,14 +64,8 @@ public class WishListController implements Serializable {
     }
 
     public void createNewCategory(){
-        wishListService.createNewCategory();
+        wishListService.createNewCategory(newCategoryName);
+        newCategoryName = "";
     }
 
-    public void setNewCategoryName(String newCategoryName){
-        wishListService.setNewCategoryName(newCategoryName);
-    }
-
-    public String getNewCategoryName(){
-        return wishListService.getNewCategoryName();
-    }
 }
