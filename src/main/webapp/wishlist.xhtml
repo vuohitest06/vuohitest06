@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+    <title>Steam Wishlist</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="css/style.css" />
+    <script type="text/javascript" src="js/jquery-3.2.0.min.js"></script>
+</h:head>
+<h:body>
+    <h3>Wishlist</h3>
+    <h:form>
+        <h:panelGroup id="wholepage">
+            <h:panelGrid columns="2" cellpadding="5">
+                <p:commandButton value="Update List" id="updateListButton" update="wholepage" actionListener="#{wishListController.updateGamesFromSteam}" styleClass="ui-priority-primary" process="updateListButton"/>
+                <p:commandButton value="Save List" id="saveListButton" update="wholepage" actionListener="#{wishListController.onSave}" styleClass="ui-priority-primary" process="saveListButton"/>
+                <p:inputText id="name" value="#{wishListController.newCategoryName}" />
+                <p:commandButton value="Create new category" id="createCategoryButton" update="wholepage" icon="ui-icon-check" actionListener="#{wishListController.createNewCategory}" process="name createCategoryButton"/>
+            </h:panelGrid>
+            <ui:repeat value="#{wishListController.categoryList}" var="category">
+                <p:orderList value="#{category}" var="wish" itemValue="#{category.wishList}" controlsLocation="none" responsive="true">
+                    <p:ajax event="reorder" listener="#{wishListController.onReorder}" update="wishList"/>
+                    <f:facet name="caption">WishList</f:facet>
+                    <p:column>
+                        <h:outputText value="#{wish.game.name}" />
+                    </p:column>
+                </p:orderList>
+            </ui:repeat>
+        </h:panelGroup>
+    </h:form>
+</h:body>
+</html>

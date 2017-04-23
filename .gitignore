@@ -1,0 +1,8 @@
+.idea
+*.iml
+/target/
+/.eclipse_classes/
+/.settings/
+/*.classpath
+/*.project
+/nb-configuration.xml
