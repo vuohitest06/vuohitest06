@@ -69,7 +69,6 @@ public class WishListService implements Serializable {
     public void init() throws IOException {
         user = userDao.getDefaultUser();
         updateCategoryList();
-        newCategoryName = "";
         LOGGER.setLevel(Level.SEVERE);
         LOGGER.log(Level.SEVERE, "*****************");
         LOGGER.log(Level.SEVERE, "*****************");
