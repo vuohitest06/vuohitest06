@@ -10,6 +10,7 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
 import javax.inject.Named;
 import java.io.IOException;
 import java.io.Serializable;
@@ -19,20 +20,15 @@ import java.util.List;
 /**
  * Created by akrantan on 10.4.2017.
  */
-@ManagedBean
+@Named
+@RequestScoped
 public class WishListController implements Serializable {
 
     @EJB
     private WishListService wishListService;
 
-    public String getNewCategoryName() {
-        return newCategoryName;
-    }
-
-    public void setNewCategoryName(String newCategoryName) {
-        this.newCategoryName = newCategoryName;
-    }
-
+    @Getter
+    @Setter
     private String newCategoryName;
 
     @Getter
@@ -42,7 +38,7 @@ public class WishListController implements Serializable {
     private User user;
 
     @PostConstruct
-    public void init() throws IOException {
+    public void init()  {
         user = wishListService.getUser();
         categoryList = wishListService.getCategoryList(user);
         newCategoryName = "";
