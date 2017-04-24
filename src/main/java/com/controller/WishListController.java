@@ -63,10 +63,9 @@ public class WishListController implements Serializable {
     }
 
     public void onSave(){
-        wishListService.onSave(categoryList);
-
         FacesContext context = FacesContext.getCurrentInstance();
         context.addMessage(null, new FacesMessage("Successful",  "updateGamesFromSteam end") );
+        wishListService.onSave(categoryList);
     }
 
     public void updateWishListFromSteam() throws IOException {
@@ -74,20 +73,18 @@ public class WishListController implements Serializable {
     }
 
     public void updateGamesFromSteam() throws IOException {
-        wishListService.updateWishListFromSteam(user);
-        categoryList = wishListService.getCategoryList(user);
-
         FacesContext context = FacesContext.getCurrentInstance();
         context.addMessage(null, new FacesMessage("Successful",  "updateGamesFromSteam end") );
+        wishListService.updateWishListFromSteam(user);
+        categoryList = wishListService.getCategoryList(user);
     }
 
     public void createNewCategory(){
+        FacesContext context = FacesContext.getCurrentInstance();
+        context.addMessage(null, new FacesMessage("Successful",  "createNewCategory end") );
         wishListService.createNewCategory(newCategoryName, user);
         categoryList = wishListService.getCategoryList(user);
         newCategoryName = "";
-
-        FacesContext context = FacesContext.getCurrentInstance();
-        context.addMessage(null, new FacesMessage("Successful",  "createNewCategory end") );
     }
 
 }
