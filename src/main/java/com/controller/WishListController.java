@@ -8,14 +8,16 @@ import lombok.Setter;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-import javax.ejb.Stateless;
-import javax.faces.bean.ManagedBean;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.RequestScoped;
+import javax.faces.context.FacesContext;
+import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 /**
  * Created by akrantan on 10.4.2017.
@@ -28,6 +30,9 @@ public class WishListController implements Serializable {
     @Setter
     @EJB
     private WishListService wishListService;
+
+    @Inject
+    private Logger logger;
 
     @Getter
     @Setter
@@ -44,6 +49,13 @@ public class WishListController implements Serializable {
         user = wishListService.getUser();
         categoryList = wishListService.getCategoryList(user);
         newCategoryName = "";
+
+        logger.info("********");
+        logger.info("********");
+        logger.info("init()");
+        logger.info("********");
+        logger.info("********");
+        logger.info("********");
     }
 
     public void onReorder(){
@@ -52,6 +64,9 @@ public class WishListController implements Serializable {
 
     public void onSave(){
         wishListService.onSave(categoryList);
+
+        FacesContext context = FacesContext.getCurrentInstance();
+        context.addMessage(null, new FacesMessage("Successful",  "updateGamesFromSteam end") );
     }
 
     public void updateWishListFromSteam() throws IOException {
@@ -61,12 +76,18 @@ public class WishListController implements Serializable {
     public void updateGamesFromSteam() throws IOException {
         wishListService.updateWishListFromSteam(user);
         categoryList = wishListService.getCategoryList(user);
+
+        FacesContext context = FacesContext.getCurrentInstance();
+        context.addMessage(null, new FacesMessage("Successful",  "updateGamesFromSteam end") );
     }
 
     public void createNewCategory(){
         wishListService.createNewCategory(newCategoryName, user);
         categoryList = wishListService.getCategoryList(user);
         newCategoryName = "";
+
+        FacesContext context = FacesContext.getCurrentInstance();
+        context.addMessage(null, new FacesMessage("Successful",  "createNewCategory end") );
     }
 
 }

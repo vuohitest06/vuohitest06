@@ -8,21 +8,21 @@
     <title>Steam Wishlist</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <link rel="stylesheet" href="css/style.css" />
-    <script type="text/javascript" src="js/jquery-3.2.0.min.js"></script>
 </h:head>
 <h:body>
     <h3>Wishlist</h3>
 
     Controller: -#{wishListController}-
     <h:form>
+        <p:growl id="growl" showDetail="true" sticky="true" />
         <h:panelGroup id="wholepage">
             <h:panelGrid columns="2" cellpadding="5">
-                <p:commandButton value="Update List" id="updateListButton" update="wholepage" actionListener="#{wishListController.updateGamesFromSteam}" styleClass="ui-priority-primary" process="updateListButton"/>
-                <p:commandButton value="Save List" id="saveListButton" update="wholepage" actionListener="#{wishListController.onSave}" styleClass="ui-priority-primary" process="saveListButton"/>
+                <p:commandButton value="Update List" id="updateListButton" update="wholepage growl" actionListener="#{wishListController.updateGamesFromSteam}" styleClass="ui-priority-primary" process="updateListButton"/>
+                <p:commandButton value="Save List" id="saveListButton" update="wholepage growl" actionListener="#{wishListController.onSave}" styleClass="ui-priority-primary" process="saveListButton"/>
                 <p:inputText id="name" value="#{wishListController.newCategoryName}" >
                     <p:ajax/>
                 </p:inputText>
-                <p:commandButton value="Create new category" id="createCategoryButton" update="wholepage" icon="ui-icon-check" actionListener="#{wishListController.createNewCategory}" process="name createCategoryButton"/>
+                <p:commandButton value="Create new category" id="createCategoryButton" update="wholepage growl" icon="ui-icon-check" actionListener="#{wishListController.createNewCategory}" process="name createCategoryButton"/>
             </h:panelGrid>
             <ui:repeat value="#{wishListController.categoryList}" var="category">
                 <p:orderList value="#{category}" var="wish" itemValue="#{category.wishList}" controlsLocation="none" responsive="true">
