@@ -23,12 +23,11 @@ import java.util.List;
 public class WishListController implements Serializable {
 
     @EJB
-    @Getter
     private WishListService wishListService;
 
     @Getter
     @Setter
-    private String newCategoryName;
+    private String newcategoryname;
 
     @Getter
     @Setter
@@ -40,7 +39,7 @@ public class WishListController implements Serializable {
     public void init() throws IOException {
         user = wishListService.getUser();
         categoryList = wishListService.getCategoryList(user);
-        newCategoryName = "";
+        newcategoryname = "";
     }
 
     public void onReorder(){
@@ -61,9 +60,9 @@ public class WishListController implements Serializable {
     }
 
     public void createNewCategory(){
-        wishListService.createNewCategory(newCategoryName, user);
+        wishListService.createNewCategory(newcategoryname, user);
         categoryList = wishListService.getCategoryList(user);
-        newCategoryName = "";
+        newcategoryname = "";
     }
 
 }
