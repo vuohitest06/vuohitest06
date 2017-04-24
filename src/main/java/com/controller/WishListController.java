@@ -1,19 +1,18 @@
 package com.controller;
 
 import com.domain.Category;
-import com.domain.Wish;
+import com.domain.User;
 import com.service.WishListService;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
-import javax.enterprise.context.SessionScoped;
-import javax.faces.bean.ManagedBean;
-import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -31,20 +30,17 @@ public class WishListController implements Serializable {
     @Setter
     private String newCategoryName;
 
-    public List<Category> getCategoryList(){
-        return wishListService.getCategoryList();
-    }
+    @Getter
+    @Setter
+    private List<Category> categoryList = new ArrayList<>();
 
-    public void setCategoryList(List<Category> categoryList){
-        wishListService.setCategoryList(categoryList);
-    }
+    private User user;
 
-    public void getWishList(int index){
-        wishListService.getWishList(index);
-    }
-
-    public void setWishList(int index, List<Wish> wishList){
-        wishListService.setWishList(index, wishList);
+    @PostConstruct
+    public void init() throws IOException {
+        user = wishListService.getUser();
+        categoryList = wishListService.getCategoryList(user);
+        newCategoryName = "";
     }
 
     public void onReorder(){
@@ -52,19 +48,21 @@ public class WishListController implements Serializable {
     }
 
     public void onSave(){
-        wishListService.onSave();
+        wishListService.onSave(categoryList);
     }
 
     public void updateWishListFromSteam() throws IOException {
-        wishListService.updateWishListFromSteam();
+        wishListService.updateWishListFromSteam(user);
     }
 
-    public void updateGamesFromSteam(){
-        wishListService.updateGamesFromSteam();
+    public void updateGamesFromSteam() throws IOException {
+        wishListService.updateWishListFromSteam(user);
+        categoryList = wishListService.getCategoryList(user);
     }
 
     public void createNewCategory(){
-        wishListService.createNewCategory(newCategoryName);
+        wishListService.createNewCategory(newCategoryName, user);
+        categoryList = wishListService.getCategoryList(user);
         newCategoryName = "";
     }
 

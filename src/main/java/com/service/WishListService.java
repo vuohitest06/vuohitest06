@@ -51,64 +51,25 @@ public class WishListService implements Serializable {
     @EJB
     private CategoryDao categoryDao;
 
-    @Getter
-    @Setter
-    private List<Category> categoryList = new ArrayList<>();
-
-    private User user;
-
-    public List<Wish> getWishList(int index){
-        return categoryList.get(index).getWishList();
-    }
-
-    public void setWishList(int index, List<Wish> wishList){
-        categoryList.get(index).setWishList(wishList);
-    }
-
-    @PostConstruct
-    public void init() throws IOException {
-        user = userDao.getDefaultUser();
-        updateCategoryList();
-        LOGGER.setLevel(Level.SEVERE);
-        LOGGER.log(Level.SEVERE, "*****************");
-        LOGGER.log(Level.SEVERE, "*****************");
-        LOGGER.log(Level.SEVERE, "*****************");
-        LOGGER.log(Level.SEVERE, "init");
-        LOGGER.log(Level.SEVERE, "*****************");
-        LOGGER.log(Level.SEVERE, "*****************");
-        LOGGER.log(Level.SEVERE, "*****************");
-        throw new NullPointerException();
-    }
-
     public void onReorder(){
     }
 
-    public void onSave(){
-        LOGGER.log(Level.SEVERE, "*****************");
-        LOGGER.log(Level.SEVERE, "*****************");
-        LOGGER.log(Level.SEVERE, "*****************");
-        LOGGER.log(Level.SEVERE, "onSave");
-        LOGGER.log(Level.SEVERE, "*****************");
-        LOGGER.log(Level.SEVERE, "*****************");
-        LOGGER.log(Level.SEVERE, "*****************");
+    public void onSave(List<Category> categoryList){
         for(Category category : categoryList){
             categoryDao.update(category);
         }
         throw new NullPointerException();
     }
 
-    private void updateCategoryList(){
-        categoryList = categoryDao.getCategoryList(user);
+    public List<Category> getCategoryList(User user){
+        return(categoryDao.getCategoryList(user));
     }
 
-    public void updateWishListFromSteam() throws IOException {
-        LOGGER.log(Level.SEVERE, "*****************");
-        LOGGER.log(Level.SEVERE, "*****************");
-        LOGGER.log(Level.SEVERE, "*****************");
-        LOGGER.log(Level.SEVERE, "updateWishListFromSteam");
-        LOGGER.log(Level.SEVERE, "*****************");
-        LOGGER.log(Level.SEVERE, "*****************");
-        LOGGER.log(Level.SEVERE, "*****************");
+    public User getUser(){
+        return(userDao.getDefaultUser());
+    }
+
+    public void updateWishListFromSteam(User user) throws IOException {
         Category defaultCategory = categoryDao.getDefaultCategory(user);
 
         List<Game> dbGameList = gameDao.getGameList(user);
@@ -127,26 +88,15 @@ public class WishListService implements Serializable {
         for(Game game : removedGamesList){
             wishDao.deleteWish(user, game);
         }
-
-        updateCategoryList();
-        throw new NullPointerException();
     }
 
-    public void updateGamesFromSteam(){
-        // wishList = steamConnector.getWishListFromSteam();
+    public void updateGamesFromSteam(User user){
+//        return steamConnector.getWishListFromSteam(user);
     }
 
-    public void createNewCategory(String newCategoryName){
-        LOGGER.log(Level.SEVERE, "*****************");
-        LOGGER.log(Level.SEVERE, "*****************");
-        LOGGER.log(Level.SEVERE, "*****************");
-        LOGGER.log(Level.SEVERE, "createNewCategory");
-        LOGGER.log(Level.SEVERE, "*****************");
-        LOGGER.log(Level.SEVERE, "*****************");
-        LOGGER.log(Level.SEVERE, "*****************");
+    public void createNewCategory(String newCategoryName, User user){
         Category category = new Category(user, newCategoryName);
         categoryDao.create(category);
-        updateCategoryList();
         throw new NullPointerException();
     }
 
