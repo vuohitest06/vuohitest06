@@ -24,6 +24,8 @@ import java.util.List;
 @RequestScoped
 public class WishListController implements Serializable {
 
+    @Getter
+    @Setter
     @EJB
     private WishListService wishListService;
 
@@ -39,9 +41,9 @@ public class WishListController implements Serializable {
 
     @PostConstruct
     public void init()  {
-        user = wishListService.getUser();
-        categoryList = wishListService.getCategoryList(user);
-        newCategoryName = "";
+//        user = wishListService.getUser();
+//        categoryList = wishListService.getCategoryList(user);
+//        newCategoryName = "";
     }
 
     public void onReorder(){
