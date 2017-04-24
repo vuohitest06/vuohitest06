@@ -9,6 +9,7 @@ import lombok.Setter;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import javax.faces.bean.ManagedBean;
 import javax.inject.Named;
 import java.io.IOException;
 import java.io.Serializable;
@@ -18,8 +19,7 @@ import java.util.List;
 /**
  * Created by akrantan on 10.4.2017.
  */
-@Stateless
-@Named("wishListController")
+@ManagedBean
 public class WishListController implements Serializable {
 
     @EJB
