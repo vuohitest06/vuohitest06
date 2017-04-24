@@ -25,9 +25,15 @@ public class WishListController implements Serializable {
     @EJB
     private WishListService wishListService;
 
-    @Getter
-    @Setter
-    private String newcategoryname;
+    public String getNewCategoryName() {
+        return newCategoryName;
+    }
+
+    public void setNewCategoryName(String newCategoryName) {
+        this.newCategoryName = newCategoryName;
+    }
+
+    private String newCategoryName;
 
     @Getter
     @Setter
@@ -39,7 +45,7 @@ public class WishListController implements Serializable {
     public void init() throws IOException {
         user = wishListService.getUser();
         categoryList = wishListService.getCategoryList(user);
-        newcategoryname = "";
+        newCategoryName = "";
     }
 
     public void onReorder(){
@@ -60,9 +66,9 @@ public class WishListController implements Serializable {
     }
 
     public void createNewCategory(){
-        wishListService.createNewCategory(newcategoryname, user);
+        wishListService.createNewCategory(newCategoryName, user);
         categoryList = wishListService.getCategoryList(user);
-        newcategoryname = "";
+        newCategoryName = "";
     }
 
 }

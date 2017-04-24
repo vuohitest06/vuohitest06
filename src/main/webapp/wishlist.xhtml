@@ -17,7 +17,7 @@
             <h:panelGrid columns="2" cellpadding="5">
                 <p:commandButton value="Update List" id="updateListButton" update="wholepage" actionListener="#{wishListController.updateGamesFromSteam}" styleClass="ui-priority-primary" process="updateListButton"/>
                 <p:commandButton value="Save List" id="saveListButton" update="wholepage" actionListener="#{wishListController.onSave}" styleClass="ui-priority-primary" process="saveListButton"/>
-                <p:inputText id="name" value="#{wishListController.newcategoryname}" >
+                <p:inputText id="name" value="#{wishListController.newCategoryName}" >
                     <p:ajax/>
                 </p:inputText>
                 <p:commandButton value="Create new category" id="createCategoryButton" update="wholepage" icon="ui-icon-check" actionListener="#{wishListController.createNewCategory}" process="name createCategoryButton"/>
