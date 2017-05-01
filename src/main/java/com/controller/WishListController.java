@@ -28,7 +28,7 @@ public class WishListController implements Serializable {
 
     @Getter
     @Setter
-    @EJB
+    @Inject
     private WishListService wishListService;
 
     @Getter
