@@ -31,9 +31,6 @@ public class WishListController implements Serializable {
     @EJB
     private WishListService wishListService;
 
-    @Inject
-    private Logger logger;
-
     @Getter
     @Setter
     private String newCategoryName;
@@ -49,13 +46,6 @@ public class WishListController implements Serializable {
         user = wishListService.getUser();
         categoryList = wishListService.getCategoryList(user);
         newCategoryName = "";
-
-        logger.info("********");
-        logger.info("********");
-        logger.info("init()");
-        logger.info("********");
-        logger.info("********");
-        logger.info("********");
     }
 
     public void onReorder(){
