@@ -10,6 +10,7 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -23,12 +24,12 @@ import java.util.logging.Logger;
  * Created by akrantan on 10.4.2017.
  */
 @Named
-@RequestScoped
+@SessionScoped
 public class WishListController implements Serializable {
 
     @Getter
     @Setter
-    @Inject
+    @EJB(name = "wishListService")
     private WishListService wishListService;
 
     @Getter
