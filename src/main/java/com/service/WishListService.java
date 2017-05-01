@@ -8,21 +8,14 @@ import com.domain.Category;
 import com.domain.Game;
 import com.domain.User;
 import com.domain.Wish;
-import lombok.Getter;
-import lombok.Setter;
 import org.apache.commons.collections4.CollectionUtils;
 
-import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
-import javax.inject.Inject;
 import java.io.IOException;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * Created by GoatProphet on 17/04/2017.
@@ -30,25 +23,26 @@ import java.util.logging.Logger;
 @Stateless
 public class WishListService implements Serializable {
 
-    private final static Logger LOGGER = Logger.getLogger(WishListService.class.getName());
+//    private final static Logger LOGGER = Logger.getLogger(WishListService.class.getName());
     
 //    @Getter
 //    @Setter
 //    private String newCategoryName;
 
-    @EJB
+
+    @EJB(name = "steamConnector")
     private SteamConnector steamConnector;
 
-    @EJB
+    @EJB(name = "userDao")
     private UserDao userDao;
 
-    @EJB
+    @EJB(name = "gameDao")
     private GameDao gameDao;
 
-    @EJB
+    @EJB(name = "wishDao")
     private WishDao wishDao;
 
-    @EJB
+    @EJB(name = "categoryDao")
     private CategoryDao categoryDao;
 
     public void onReorder(){
