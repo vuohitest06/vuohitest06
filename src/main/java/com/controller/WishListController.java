@@ -39,6 +39,10 @@ public class WishListController implements Serializable {
 
     private User user;
 
+    public String getControllerTest(){
+        return "Controller Test";
+    }
+
     @PostConstruct
     public void init()  {
 //        user = wishListService.getUser();

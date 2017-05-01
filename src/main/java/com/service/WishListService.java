@@ -8,6 +8,7 @@ import com.domain.Category;
 import com.domain.Game;
 import com.domain.User;
 import com.domain.Wish;
+import lombok.Getter;
 import org.apache.commons.collections4.CollectionUtils;
 
 import javax.ejb.EJB;
@@ -46,6 +47,10 @@ public class WishListService implements Serializable {
     private CategoryDao categoryDao;
 
     public void onReorder(){
+    }
+
+    public String getServiceTest(){
+        return "Service Test";
     }
 
     public void onSave(List<Category> categoryList){
