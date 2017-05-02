@@ -45,8 +45,8 @@ public class WishListController implements Serializable {
 
     @PostConstruct
     public void init()  {
-//        user = wishListService.getUser();
-//        categoryList = wishListService.getCategoryList(user);
+        user = wishListService.getUser();
+        categoryList = wishListService.getCategoryList(user);
         newCategoryName = "";
     }
 
