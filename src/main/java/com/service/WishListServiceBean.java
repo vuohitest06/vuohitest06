@@ -24,9 +24,9 @@ import java.util.List;
  */
 @Stateless
 @LocalBean
-public class WishListService implements Serializable {
+public class WishListServiceBean implements Serializable {
 
-//    private final static Logger LOGGER = Logger.getLogger(WishListService.class.getName());
+//    private final static Logger LOGGER = Logger.getLogger(WishListServiceBean.class.getName());
 
 //    @Getter
 //    @Setter

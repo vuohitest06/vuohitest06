@@ -2,7 +2,7 @@ package com.controller;
 
 import com.domain.Category;
 import com.domain.User;
-import com.service.WishListService;
+import com.service.WishListServiceBean;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -11,7 +11,6 @@ import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
-import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.IOException;
 import java.io.Serializable;
@@ -28,7 +27,7 @@ public class WishListController implements Serializable {
     @Getter
     @Setter
     @EJB
-    private WishListService wishListService;
+    private WishListServiceBean wishListService;
 
     @Getter
     @Setter
