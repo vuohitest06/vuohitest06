@@ -7,10 +7,10 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.annotation.PostConstruct;
-import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.IOException;
 import java.io.Serializable;
@@ -26,7 +26,7 @@ public class WishListController implements Serializable {
 
     @Getter
     @Setter
-    @EJB
+    @Inject
     private WishListServiceBean wishListService;
 
     @Getter

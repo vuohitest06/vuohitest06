@@ -1,14 +1,14 @@
 <server>
 
-    <!--<featureManager>-->
-        <!--<feature>jpa-2.1</feature>-->
-        <!--<feature>ejb-3.2</feature>-->
-        <!--<feature>servlet-3.1</feature>-->
-        <!--<feature>localConnector-1.0</feature>-->
-        <!--<feature>cdi-1.2</feature>-->
-        <!--<feature>javaee-7.0</feature>-->
-        <!--<feature>jsf-2.2</feature>-->
-    <!--</featureManager>-->
+    <featureManager>
+        <feature>jpa-2.1</feature>
+        <feature>ejb-3.2</feature>
+        <feature>servlet-3.1</feature>
+        <feature>localConnector-1.0</feature>
+        <feature>cdi-1.2</feature>
+        <feature>javaee-7.0</feature>
+        <feature>jsf-2.2</feature>
+    </featureManager>
 
     <httpEndpoint id="defaultHttpEndpoint"
                   host="*"
@@ -16,12 +16,12 @@
         <tcpOptions soReuseAddr="true"/>
     </httpEndpoint>
 
-<!--
-    <jdbcDriver id="MySQLJDBCDriver" libraryRef="jdbclib"/>
-    <dataSource id="mySQL" jdbcDriverRef="MySQLJDBCDriver" jndiName="jdbc/WihListDB">
-        <properties URL="jdbc:mysql://192.168.1.20/TOTP" password="myPW" user="myuser"/>
-    </dataSource>
--->
+    <!--
+        <jdbcDriver id="MySQLJDBCDriver" libraryRef="jdbclib"/>
+        <dataSource id="mySQL" jdbcDriverRef="MySQLJDBCDriver" jndiName="jdbc/WihListDB">
+            <properties URL="jdbc:mysql://192.168.1.20/TOTP" password="myPW" user="myuser"/>
+        </dataSource>
+    -->
 
     <application name="VuohiTest06" context-root="/VuohiTest06" location="${appLocation}" type="war"/>
 

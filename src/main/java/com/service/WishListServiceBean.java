@@ -8,12 +8,11 @@ import com.domain.Category;
 import com.domain.Game;
 import com.domain.User;
 import com.domain.Wish;
-import lombok.Getter;
 import org.apache.commons.collections4.CollectionUtils;
 
-import javax.ejb.EJB;
-import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
+import javax.inject.Inject;
+import javax.inject.Named;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.Collection;
@@ -23,7 +22,7 @@ import java.util.List;
  * Created by GoatProphet on 17/04/2017.
  */
 @Stateless
-@LocalBean
+@Named("wishListServiceBean")
 public class WishListServiceBean implements Serializable {
 
 //    private final static Logger LOGGER = Logger.getLogger(WishListServiceBean.class.getName());
@@ -31,21 +30,20 @@ public class WishListServiceBean implements Serializable {
 //    @Getter
 //    @Setter
 //    private String newCategoryName;
-
-
-    @EJB(name = "steamConnector")
+    
+    @Inject
     private SteamConnector steamConnector;
 
-    @EJB(name = "userDao")
+    @Inject
     private UserDao userDao;
 
-    @EJB(name = "gameDao")
+    @Inject
     private GameDao gameDao;
 
-    @EJB(name = "wishDao")
+    @Inject
     private WishDao wishDao;
 
-    @EJB(name = "categoryDao")
+    @Inject
     private CategoryDao categoryDao;
 
     public void onReorder() {
