@@ -30,7 +30,7 @@ public class WishListServiceBean implements Serializable {
 //    @Getter
 //    @Setter
 //    private String newCategoryName;
-    
+
     @Inject
     private SteamConnector steamConnector;
 
