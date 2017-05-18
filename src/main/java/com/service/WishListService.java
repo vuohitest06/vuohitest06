@@ -12,6 +12,7 @@ import lombok.Getter;
 import org.apache.commons.collections4.CollectionUtils;
 
 import javax.ejb.EJB;
+import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import java.io.IOException;
 import java.io.Serializable;
@@ -22,10 +23,11 @@ import java.util.List;
  * Created by GoatProphet on 17/04/2017.
  */
 @Stateless
+@LocalBean
 public class WishListService implements Serializable {
 
 //    private final static Logger LOGGER = Logger.getLogger(WishListService.class.getName());
-    
+
 //    @Getter
 //    @Setter
 //    private String newCategoryName;
@@ -46,26 +48,26 @@ public class WishListService implements Serializable {
     @EJB(name = "categoryDao")
     private CategoryDao categoryDao;
 
-    public void onReorder(){
+    public void onReorder() {
     }
 
-    public String getServiceTest(){
+    public String getServiceTest() {
         return "Service Test";
     }
 
-    public void onSave(List<Category> categoryList){
-        for(Category category : categoryList){
+    public void onSave(List<Category> categoryList) {
+        for (Category category : categoryList) {
             categoryDao.update(category);
         }
         throw new NullPointerException();
     }
 
-    public List<Category> getCategoryList(User user){
-        return(categoryDao.getCategoryList(user));
+    public List<Category> getCategoryList(User user) {
+        return (categoryDao.getCategoryList(user));
     }
 
-    public User getUser(){
-        return(userDao.getDefaultUser());
+    public User getUser() {
+        return (userDao.getDefaultUser());
     }
 
     public void updateWishListFromSteam(User user) throws IOException {
@@ -77,23 +79,23 @@ public class WishListService implements Serializable {
         Collection<Game> newGamesList = CollectionUtils.subtract(steamGameList, dbGameList);
         Collection<Game> removedGamesList = CollectionUtils.subtract(dbGameList, steamGameList);
 
-        for(Game game : newGamesList){
+        for (Game game : newGamesList) {
             game = gameDao.checkAndCreateNewGame(game);
             Wish newWish = new Wish(game);
             defaultCategory.getWishList().add(newWish);
         }
         categoryDao.update(defaultCategory);
 
-        for(Game game : removedGamesList){
+        for (Game game : removedGamesList) {
             wishDao.deleteWish(user, game);
         }
     }
 
-    public void updateGamesFromSteam(User user){
+    public void updateGamesFromSteam(User user) {
 //        return steamConnector.getWishListFromSteam(user);
     }
 
-    public void createNewCategory(String newCategoryName, User user){
+    public void createNewCategory(String newCategoryName, User user) {
         Category category = new Category(user, newCategoryName);
         categoryDao.create(category);
         throw new NullPointerException();
